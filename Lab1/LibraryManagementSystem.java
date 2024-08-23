@@ -15,6 +15,15 @@ public class LibraryManagementSystem {
 		System.out.println(book + " has been successfully added.");
 	}
 
+    public void insert(int index, String book) {
+        if (index <= 0 || index > books.size() + 1) {
+            System.out.println("Invalid index. Please provide a valid index.");
+            return;
+        }
+        books.add(index - 1, book);
+        System.out.println(book + " has been successfully inserted at index " + index + ".");
+    }
+	
 	public static void main(String[] args) {
 		LibraryManagementSystem lib = new LibraryManagementSystem();
 		int choice;
