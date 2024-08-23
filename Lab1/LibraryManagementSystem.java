@@ -41,6 +41,24 @@ public class LibraryManagementSystem {
 				lib.add(bookadd); 
 				break;
 
+	                case 2:
+                    if (lib.books.isEmpty()) {
+                        System.out.println("No books to show.");
+                    } else {
+                        System.out.println("Enter the index where you wish to insert the book:");
+                        int index = scan.nextInt();
+                        scan.nextLine(); // Consume the newline
+                        if (index <= 0 || index > lib.books.size() + 1) {
+                            System.out.println("Invalid index. Please provide a valid index.");
+                        } else {
+                            System.out.println("Enter the name of the book you want to insert: ");
+                            String bookToInsert = scan.nextLine();
+                            lib.insert(index, bookToInsert);
+                        }
+                    }
+                    break;
+					
+			
 			case 5:
 				System.out.println("Program has been terminated.");
 				scan.close();
