@@ -24,6 +24,19 @@ public class LibraryManagementSystem {
 		books.add(index - 1, book);
 		JOptionPane.showMessageDialog(null, book + " has been successfully inserted at index " + index + ".");
 	}
+	
+	public void size() {
+	    if (books.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "No books available in the library.", "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+	    } else {
+	        StringBuilder message = new StringBuilder("Books in the library:\n");
+	        for (int i = 0; i < books.size(); i++) {
+	            message.append((i + 1)).append(". ").append(books.get(i)).append("\n");
+	        }
+	        message.append("\nTotal number of books in the library: ").append(books.size());
+	        JOptionPane.showMessageDialog(null, message.toString(), "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+	    }
+	}
 
 	public void remove(int index) {
 		if (index < 0 || index >= books.size()) {
@@ -79,6 +92,10 @@ public class LibraryManagementSystem {
 				} catch (Exception IndexOutOfBoundsException) {
 					JOptionPane.showMessageDialog(null, "Invalid! Index does not exist.");
 				}   
+				break;
+
+			case 5: 
+				lib.size();
 				break;
 
 			case 6:
