@@ -47,9 +47,6 @@ public class LibraryManagementSystem {
 		String removedBook = books.remove(index - 1);
 		JOptionPane.showMessageDialog(null, removedBook + " has been successfully removed.");
 	}
-
-
-
 	
 	public static void main(String[] args) {
 		LibraryManagementSystem lib = new LibraryManagementSystem();
