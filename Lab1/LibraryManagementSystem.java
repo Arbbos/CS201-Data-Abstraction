@@ -41,7 +41,7 @@ public class LibraryManagementSystem {
 		Scanner scan = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("Welcome to Library Management System. \n 1. Add book \n 2. Insert Book \n 3. Remove Book \n 4. Search Book \n 5. Exit\nWhat do you wish to do?");
+			System.out.println("Welcome to Library Management System. \n 1. Add book \n 2. Insert Book \n 3. Remove Book \n 4. Search Book \n 5. Show Number of Books \n 6. Exit\nWhat do you wish to do?");
 			choice = scan.nextInt();
 			System.out.println();
 
@@ -91,7 +91,7 @@ public class LibraryManagementSystem {
     				}   
 				break;
 			
-			case 5:
+			case 6:
 				System.out.println("Program has been terminated.");
 				scan.close();
 				return; 
