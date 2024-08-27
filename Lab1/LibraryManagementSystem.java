@@ -36,18 +36,7 @@ public class LibraryManagementSystem {
 	}
 
 
-		public void showBooks() {
-	    if (books.isEmpty()) {
-	        JOptionPane.showMessageDialog(null, "No books available in the library.", "Library Management System", JOptionPane.INFORMATION_MESSAGE);
-	    } else {
-	        StringBuilder message = new StringBuilder("Books in the library:\n");
-	        for (int i = 0; i < books.size(); i++) {
-	            message.append((i + 1)).append(". ").append(books.get(i)).append("\n");
-	        }
-	        message.append("\nTotal number of books in the library: ").append(books.size());
-	        JOptionPane.showMessageDialog(null, message.toString(), "Library Management System", JOptionPane.INFORMATION_MESSAGE);
-	    }
-	}
+
 	
 	public static void main(String[] args) {
 		LibraryManagementSystem lib = new LibraryManagementSystem();
@@ -96,9 +85,6 @@ public class LibraryManagementSystem {
 				JOptionPane.showMessageDialog(null, "Program has been terminated.");
 				return; 
 
-			case 5:
-				lib.showBooks();
-				break;
 					
 			default:
 				JOptionPane.showMessageDialog(null, "The option you selected does not exist. Please try again.");
