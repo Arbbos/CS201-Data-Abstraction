@@ -1,6 +1,7 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class LibraryManagementSystem {
 	private ArrayList<String> books;
@@ -12,88 +13,78 @@ public class LibraryManagementSystem {
 
 	public void add(String book) {
 		books.add(book);
-		System.out.println(book + " has been successfully added.");
+		JOptionPane.showMessageDialog(null, book + " has been successfully added.");
 	}
 
-    public void insert(int index, String book) {
-        if (index <= 0 || index > books.size() + 1) {
-            System.out.println("Invalid index. Please provide a valid index.");
-            return;
-        }
-        books.add(index - 1, book);
-        System.out.println(book + " has been successfully inserted at index " + index + ".");
-    }
-	
+	public void insert(int index, String book) {
+		if (index <= 0 || index > books.size() + 1) {
+			JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index.");
+			return;
+		}
+		books.add(index - 1, book);
+		JOptionPane.showMessageDialog(null, book + " has been successfully inserted at index " + index + ".");
+	}
+
 	public void remove(int index) {
 		if (index < 0 || index >= books.size()) {
 			// https://www.geeksforgeeks.org/array-index-out-of-bounds-exception-in-java/ 
 			// for handling invalid index
-			throw new IndexOutOfBoundsException("Invalid index. Please provide a valid index");
+			JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		String removedBook = books.remove(index);
-        	System.out.println(removedBook + " has been successfully removed.");
-    	}
-		
-	
+		String removedBook = books.remove(index - 1);
+		JOptionPane.showMessageDialog(null, removedBook + " has been successfully removed.");
+	}
+
+
 	public static void main(String[] args) {
 		LibraryManagementSystem lib = new LibraryManagementSystem();
 		int choice;
-		Scanner scan = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("Welcome to Library Management System. \n 1. Add book \n 2. Insert Book \n 3. Remove Book \n 4. Search Book \n 5. Show Number of Books \n 6. Exit\nWhat do you wish to do?");
-			choice = scan.nextInt();
-			System.out.println();
+			choice = Integer.parseInt(JOptionPane.showInputDialog("Welcome to Library Management System. \n 1. Add book \n 2. Insert Book \n 3. Remove Book \n 4. Search Book \n 5. Show Number of Books \n 6. Exit\nWhat do you wish to do?"));
 
 			switch (choice) {
 			case 1:
-				System.out.println("Enter the name of the book you wish to add: ");
-				String bookadd = scan.next();
+				String bookadd = JOptionPane.showInputDialog("Enter the name of the book you wish to add: ");
 				lib.add(bookadd); 
 				break;
 
-	                case 2:
-	                    	if (lib.books.isEmpty()) {
-	                        	System.out.println("No books to insert.");
-	                    	} else {
-	                        	System.out.println("Enter the index where you wish to insert the book:");
-	                        	int index = scan.nextInt();
+			case 2:
+				if (lib.books.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No books to insert.");
+				} else {
+					int index = Integer.parseInt(JOptionPane.showInputDialog("Enter the index where you wish to insert the book:"));
 
-	                        if (index <= 0 || index > lib.books.size() + 1) {
-	                            System.out.println("Invalid index. Please provide a valid index.");
-	                        } else {
-	                            	System.out.println("Enter the name of the book you want to insert: ");
-	                            	String bookToInsert = scan.nextLine();
-	                            	lib.insert(index, bookToInsert);
-	                       	 	}
-	                    	}
-	                    break;
+					if (index <= 0 || index > lib.books.size() + 1) {
+						JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index.");
+					} else {
+						String bookToInsert = JOptionPane.showInputDialog("Enter the name of the book you want to insert: ");
+						lib.insert(index, bookToInsert);
+					}
+				}
+				break;
 
 			case 3: 
-				System.out.print("Enter the index where you wish to remove the book: ");
-                    		int indexToRemove = scan.nextInt();
-                    		scan.nextLine();
-                    		lib.remove(indexToRemove);
-                    		break;
+				int indexToRemove = Integer.parseInt(JOptionPane.showInputDialog("Enter the index where you wish to remove the book: "));
+				lib.remove(indexToRemove);
+				break;
 
 			case 4:
-			    System.out.println("Enter the index of the book you wish to search (starting from 1): ");
-			    int bookIndex = scan.nextInt();
+				int bookIndex = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the book you wish to search: "));
 
-			    try {
-			        System.out.println("Result: " + lib.books.get(bookIndex - 1));
-			    } catch (IndexOutOfBoundsException e) {
-			        System.out.println("Invalid! Index does not exist.");
-			    }
-			    break;
-			
+				try {
+					JOptionPane.showMessageDialog(null, "Result: " + lib.books.get(bookIndex - 1));
+				} catch (Exception IndexOutOfBoundsException) {
+					JOptionPane.showMessageDialog(null, "Invalid! Index does not exist.");
+				}   
+				break;
+
 			case 6:
-				System.out.println("Program has been terminated.");
-				scan.close();
+				JOptionPane.showMessageDialog(null, "Program has been terminated.");
 				return; 
-			
+
 			default:
-				System.out.println("The option you selected does not exist. Please try again.");
+				JOptionPane.showMessageDialog(null, "The option you selected does not exist. Please try again.");
 				break;
 			}
 		}
