@@ -77,19 +77,15 @@ public class LibraryManagementSystem {
                     		break;
 
 			case 4:
-				System.out.println("Enter the index of the book you wish to search: ");
-				int bookIndex = scan.nextInt();
-			    
-    		    		try {
-    			    		if (bookIndex > lib.books.size()) {
-    			        
-    					} else {
-    			        		System.out.println("Result: " + lib.books.get(bookIndex));
-    		        		} 
-    				} catch (Exception IndexOutOfBoundsException) {
-    			    		System.out.println("Invalid! Index does not exist.");
-    				}   
-				break;
+			    System.out.println("Enter the index of the book you wish to search (starting from 1): ");
+			    int bookIndex = scan.nextInt();
+
+			    try {
+			        System.out.println("Result: " + lib.books.get(bookIndex - 1));
+			    } catch (IndexOutOfBoundsException e) {
+			        System.out.println("Invalid! Index does not exist.");
+			    }
+			    break;
 			
 			case 6:
 				System.out.println("Program has been terminated.");
