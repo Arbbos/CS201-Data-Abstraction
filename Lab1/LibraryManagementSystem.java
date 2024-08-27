@@ -54,11 +54,11 @@ public class LibraryManagementSystem {
 
 	                case 2:
 	                    	if (lib.books.isEmpty()) {
-	                        	System.out.println("No books to show.");
+	                        	System.out.println("No books to insert.");
 	                    	} else {
 	                        	System.out.println("Enter the index where you wish to insert the book:");
 	                        	int index = scan.nextInt();
-	                        	scan.nextLine(); // Consume the newline
+
 	                        if (index <= 0 || index > lib.books.size() + 1) {
 	                            System.out.println("Invalid index. Please provide a valid index.");
 	                        } else {
