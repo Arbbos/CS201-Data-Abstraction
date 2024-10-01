@@ -33,16 +33,26 @@ public class LibraryManagementSystem {
 		JOptionPane.showMessageDialog(null, book + " has been successfully inserted at index " + index + ".");
 	}
 
-	public void borrow(int index) {
-	        if (index <= 0 || index > books.size()) {
-	            JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index.", "Error", JOptionPane.ERROR_MESSAGE);
-	            return;
+	public void borrow() {
+	    if (books.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "No books in the library available to borrow.");
+	    } else {
+	        StringBuilder message = new StringBuilder("Available Books:\n");
+	        for (int i = 0; i < books.size(); i++) {
+	            message.append((i + 1)).append(". ").append(books.get(i)).append("\n");
 	        }
 	        
-	        String borrowedBook = books.remove(index - 1);
-	        borrowedBooks.push(borrowedBook);  // Push borrowed book onto the borrowedBooks stack
-	        JOptionPane.showMessageDialog(null, borrowedBook + " has been borrowed.");
-	} 
+	        int indexToBorrow = Integer.parseInt(JOptionPane.showInputDialog(message + "\nEnter the index of the book you wish to borrow:"));
+	        
+	        if (indexToBorrow <= 0 || indexToBorrow > books.size()) {
+	            JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index.", "Error", JOptionPane.ERROR_MESSAGE);
+	        } else {
+	            String borrowedBook = books.remove(indexToBorrow - 1);
+	            borrowedBooks.push(borrowedBook);  
+	            JOptionPane.showMessageDialog(null, borrowedBook + " has been borrowed.");
+	        }
+	    }
+	}
 
 	public void size() {
 		if (books.isEmpty()) {
@@ -163,14 +173,9 @@ public class LibraryManagementSystem {
 				}
 				break;
 				
-			case 2: 
-				if (lib.books.isEmpty()) {
-		                    JOptionPane.showMessageDialog(null, "No books in the library available to borrow.");
-		                } else {
-		                    int indexToBorrow = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the book you wish to borrow:"));
-		                    lib.borrow(indexToBorrow);
-		                }
-		                break;
+			case 2:
+			    lib.borrow();
+			    break;
 				
 			case 3:
 				int bookIndex = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the book you wish to search: "));
