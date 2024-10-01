@@ -8,10 +8,12 @@ import javax.swing.JOptionPane;
 public class LibraryManagementSystem {
 	private ArrayList<String> books;
 	private Stack<String> undoStack;
+	private Stack<String> borrowedBooks;
 
 	public LibraryManagementSystem() {
 		this.books = new ArrayList<>(); 
 		this.undoStack = new Stack<>();
+		this.borrowedBooks = new Stack<>();
 	}
 
 
@@ -30,6 +32,17 @@ public class LibraryManagementSystem {
 		undoStack.push(book);
 		JOptionPane.showMessageDialog(null, book + " has been successfully inserted at index " + index + ".");
 	}
+
+	public void borrow(int index) {
+	        if (index <= 0 || index > books.size()) {
+	            JOptionPane.showMessageDialog(null, "Invalid index. Please provide a valid index.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+	        
+	        String borrowedBook = books.remove(index - 1);
+	        borrowedBooks.push(borrowedBook);  // Push borrowed book onto the borrowedBooks stack
+	        JOptionPane.showMessageDialog(null, borrowedBook + " has been borrowed.");
+	} 
 
 	public void size() {
 		if (books.isEmpty()) {
@@ -150,7 +163,14 @@ public class LibraryManagementSystem {
 				}
 				break;
 				
-//			case 2: Borrow Books
+			case 2: 
+				if (lib.books.isEmpty()) {
+		                    JOptionPane.showMessageDialog(null, "No books in the library available to borrow.");
+		                } else {
+		                    int indexToBorrow = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the book you wish to borrow:"));
+		                    lib.borrow(indexToBorrow);
+		                }
+		                break;
 				
 			case 3:
 				int bookIndex = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the book you wish to search: "));
