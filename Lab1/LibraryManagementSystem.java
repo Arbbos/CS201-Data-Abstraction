@@ -49,6 +49,33 @@ public class LibraryManagementSystem {
 		JOptionPane.showMessageDialog(null, removedBook + " has been successfully removed.");
 	}
 
+		// Shell Sort implementation 
+	public void sortBooks() {
+		ArrayList<String> sortedBooks = new ArrayList<>(books);
+		int n = sortedBooks.size();
+		for (int gap = n / 2; gap > 0; gap /= 2) {
+			for (int i = gap; i < n; i++) {
+				String temp = sortedBooks.get(i);
+				int j;
+				for (j = i; j >= gap && sortedBooks.get(j - gap).compareTo(temp) > 0; j -= gap) {
+					sortedBooks.set(j, sortedBooks.get(j - gap));
+				}
+				sortedBooks.set(j, temp);
+			}
+		}
+
+		if (sortedBooks.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No books available in the library.", "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			StringBuilder message = new StringBuilder("Books in the library (sorted):\n");
+			for (int i = 0; i < sortedBooks.size(); i++) {
+				message.append((i + 1)).append(". ").append(sortedBooks.get(i)).append("\n");
+			}
+			message.append("\nTotal number of books in the library: ").append(sortedBooks.size());
+			JOptionPane.showMessageDialog(null, message.toString(), "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
 	public static void main(String[] args) {
 		Library_Management_System lib = new Library_Management_System();
 		String option[] = {"Add Book", "Insert Book", "Borrow Book", "Search Book", "Return Book", 
@@ -109,7 +136,13 @@ public class LibraryManagementSystem {
 				lib.size();
 				break;
 			
-//			case 7: Sort Books
+			case 7:
+				if (lib.books.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No books available to sort.");
+				} else {
+					lib.sortBooks();  
+				}
+				break;
 				
 //			case 8: Undo
 
