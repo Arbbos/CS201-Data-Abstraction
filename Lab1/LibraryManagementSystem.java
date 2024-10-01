@@ -53,20 +53,22 @@ public class LibraryManagementSystem {
 		String removedBook = books.remove(index - 1);
 		JOptionPane.showMessageDialog(null, removedBook + " has been successfully removed.");
 	}
-
-		// Shell Sort implementation 
+		// Heap Sort implementation 
 	public void sortBooks() {
 		ArrayList<String> sortedBooks = new ArrayList<>(books);
 		int n = sortedBooks.size();
-		for (int gap = n / 2; gap > 0; gap /= 2) {
-			for (int i = gap; i < n; i++) {
-				String temp = sortedBooks.get(i);
-				int j;
-				for (j = i; j >= gap && sortedBooks.get(j - gap).compareTo(temp) > 0; j -= gap) {
-					sortedBooks.set(j, sortedBooks.get(j - gap));
-				}
-				sortedBooks.set(j, temp);
-			}
+		// Max heap structure
+		for (int i = n / 2 - 1; i >= 0; i--) {
+			heapify(sortedBooks, n, i);
+		}
+		// Extract elements from heap 
+		for (int i = n - 1; i > 0; i--) {
+			// Move root to end 
+			String temp = sortedBooks.get(0);
+			sortedBooks.set(0, sortedBooks.get(i));
+			sortedBooks.set(i, temp);
+			// Call heapify 
+			heapify(sortedBooks, i, 0);
 		}
 
 		if (sortedBooks.isEmpty()) {
@@ -78,6 +80,26 @@ public class LibraryManagementSystem {
 			}
 			message.append("\nTotal number of books in the library: ").append(sortedBooks.size());
 			JOptionPane.showMessageDialog(null, message.toString(), "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	private void heapify(ArrayList<String> sortedBooks, int n, int i) {
+		int largest = i;  
+		int left = 2 * i + 1;  
+		int right = 2 * i + 2;  
+
+		if (left < n && sortedBooks.get(left).compareTo(sortedBooks.get(largest)) > 0) {
+			largest = left;
+		}
+
+		if (right < n && sortedBooks.get(right).compareTo(sortedBooks.get(largest)) > 0) {
+			largest = right;
+		}
+		if (largest != i) {
+			
+			String swap = sortedBooks.get(i);
+			sortedBooks.set(i, sortedBooks.get(largest));
+			sortedBooks.set(largest, swap);
+			heapify(sortedBooks, n, largest);
 		}
 	}
 
