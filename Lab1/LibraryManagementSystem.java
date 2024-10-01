@@ -2,18 +2,22 @@ package cs201_Lab;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 
 public class LibraryManagementSystem {
 	private ArrayList<String> books;
+	private Stack<String> undoStack;
 
 	public LibraryManagementSystem() {
 		this.books = new ArrayList<>(); 
+		this.undoStack = new Stack<>();
 	}
 
 
 	public void add(String book) {
 		books.add(book);
+		undoStack.push(book);
 		JOptionPane.showMessageDialog(null, book + " has been successfully added.");
 	}
 
@@ -23,6 +27,7 @@ public class LibraryManagementSystem {
 			return;
 		}
 		books.add(index - 1, book);
+		undoStack.push(book);
 		JOptionPane.showMessageDialog(null, book + " has been successfully inserted at index " + index + ".");
 	}
 
@@ -75,6 +80,17 @@ public class LibraryManagementSystem {
 			JOptionPane.showMessageDialog(null, message.toString(), "Library Management System", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+
+	public void undo() {
+		if (undoStack.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No books available in the library");
+		} else {
+			String lastAddedBook = undoStack.pop(); // Pop the last added book 
+			books.remove(lastAddedBook); // Remove the last added book 
+			JOptionPane.showMessageDialog(null, lastAddedBook + " has been undone and removed from the library.");
+		}
+	}
+
 	
 	public static void main(String[] args) {
 		Library_Management_System lib = new Library_Management_System();
@@ -144,7 +160,9 @@ public class LibraryManagementSystem {
 				}
 				break;
 				
-//			case 8: Undo
+			case 8: 
+				lib.undo();
+				break;
 
 			case 9:
 				JOptionPane.showMessageDialog(null, "Program has been terminated.");
