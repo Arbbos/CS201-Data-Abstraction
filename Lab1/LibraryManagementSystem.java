@@ -128,7 +128,7 @@ public class LibraryManagementSystem {
 
 	
 	public static void main(String[] args) {
-		Library_Management_System lib = new Library_Management_System();
+		LibraryManagementSystem lib = new LibraryManagementSystem();
 		String option[] = {"Add Book", "Insert Book", "Borrow Book", "Search Book", "Return Book", 
 				"Remove Book", "Show Books", "Sort Books", "Undo", "Exit"};
 
