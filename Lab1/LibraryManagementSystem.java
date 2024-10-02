@@ -54,6 +54,29 @@ public class LibraryManagementSystem {
 	    }
 	}
 
+	public void returnBook() {
+        if (borrowedBooks.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No books to return.", "Library Management System", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Display borrowed books to the user
+            StringBuilder message = new StringBuilder("Borrowed Books:\n");
+            for (int i = 0; i < borrowedBooks.size(); i++) {
+                message.append((i + 1)).append(". ").append(borrowedBooks.get(i)).append("\n");
+            }
+
+            int returnIndex = Integer.parseInt(JOptionPane.showInputDialog(message + "\nEnter the index of the book you want to return:"));
+            if (returnIndex <= 0 || returnIndex > borrowedBooks.size()) {
+                JOptionPane.showMessageDialog(null, "Invalid index. Please select a valid borrowed book index.");
+                return;
+            }
+
+            // Retrieve the book from borrowedBooks stack and return it to the library
+            String returnedBook = borrowedBooks.remove(returnIndex - 1);
+            books.add(returnedBook);  // Return the book to the books list
+            JOptionPane.showMessageDialog(null, returnedBook + " has been successfully returned to the library.");
+        }
+    }
+
 	public void size() {
 		if (books.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No books available in the library.", "Library Management System", JOptionPane.INFORMATION_MESSAGE);
@@ -187,7 +210,9 @@ public class LibraryManagementSystem {
 				}   
 				break;
 				
-//			case 4: Return Book
+			case 4: Return Book
+				lib.returnBook();
+				break;
 				
 			case 5: 
 				int indexToRemove = Integer.parseInt(JOptionPane.showInputDialog("Enter the index where you wish to remove the book: "));
