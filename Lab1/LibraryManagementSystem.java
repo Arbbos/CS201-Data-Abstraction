@@ -210,7 +210,7 @@ public class LibraryManagementSystem {
 				}   
 				break;
 				
-			case 4: Return Book
+			case 4:
 				lib.returnBook();
 				break;
 				
